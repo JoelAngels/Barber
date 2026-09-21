@@ -54,9 +54,16 @@ export const OverviewTab: React.FC = () => {
                 {waitingWalkIns.slice(0, 3).map(walkIn => (
                   <div
                     key={walkIn.id}
-                    className="p-4 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#262626] flex items-center justify-between gap-3 shadow-xs"
+                    className="p-4 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#262626] gap-3 flex items-center justify-between gap-3 shadow-xs"
                   >
-                    <div>
+                    <Avatar
+                      name={walkIn.customerName}
+                      src={clients.find(c => c.name === walkIn.customerName)?.avatar}
+                      size={40}
+                      className="mt-0.5"
+                    />
+
+                    <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
                         <span className="px-2 py-0.5 rounded-full bg-slate-900 text-white dark:bg-white dark:text-black font-mono font-bold text-[10px]">
                           #{walkIn.ticketNumber}
@@ -141,7 +148,7 @@ export const OverviewTab: React.FC = () => {
                 return (
                   <div
                     key={apt.id}
-                    className="p-4 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#262626] flex items-center justify-between gap-4 shadow-xs"
+                    className="p-4 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#262626] gap-3 flex items-center justify-between gap-4 shadow-xs"
                   >
                     <div className="flex items-center gap-4">
                       <div className="w-16 shrink-0 text-center">

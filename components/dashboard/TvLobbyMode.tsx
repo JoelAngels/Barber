@@ -2,11 +2,12 @@
 
 import React from 'react';
 import {useApp} from '../../context/AppContext';
+import {Avatar} from '../common/Avatar';
 import {BRAND_CONFIG} from '../../config/brand';
 import {X, Clock, Scissors, Sparkles} from 'lucide-react';
 
 export const TvLobbyMode: React.FC = () => {
-  const { walkIns, setTvModeOpen, tvModeOpen } = useApp();
+  const { walkIns, setTvModeOpen, tvModeOpen, clients } = useApp();
 
   if (!tvModeOpen) return null;
 
@@ -54,9 +55,17 @@ export const TvLobbyMode: React.FC = () => {
               ) : (
                 inChairList.map(item => (
                   <div key={item.id} className="p-6 rounded-2xl bg-zinc-950 border border-blue-500/30 flex items-center justify-between">
-                    <div>
-                      <span className="text-3xl font-mono font-extrabold text-blue-400 block">{item.ticketNumber}</span>
-                      <h3 className="text-xl font-bold text-stone-100 mt-1">{item.customerName}</h3>
+                    <div className="flex items-center gap-4">
+                      <Avatar
+                        name={item.customerName}
+                        src={clients.find(c => c.name === item.customerName)?.avatar}
+                        size={64}
+                        ring="ring-blue-500/40"
+                      />
+                      <div>
+                        <span className="text-3xl font-mono font-extrabold text-blue-400 block">{item.ticketNumber}</span>
+                        <h3 className="text-xl font-bold text-stone-100 mt-1">{item.customerName}</h3>
+                      </div>
                     </div>
                     <div className="text-right">
                       <span className="text-xs font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/30 inline-block">
@@ -90,6 +99,11 @@ export const TvLobbyMode: React.FC = () => {
                       <span className="w-8 h-8 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold flex items-center justify-center border border-blue-500/20">
                         #{idx + 1}
                       </span>
+                      <Avatar
+                        name={item.customerName}
+                        src={clients.find(c => c.name === item.customerName)?.avatar}
+                        size={40}
+                      />
                       <div>
                         <span className="text-xl font-mono font-bold text-stone-100">{item.ticketNumber}</span>
                         <p className="text-xs text-stone-400">{item.customerName}</p>

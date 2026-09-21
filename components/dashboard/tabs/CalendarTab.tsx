@@ -6,7 +6,7 @@ import {Avatar} from '../../common/Avatar';
 import {Calendar as CalendarIcon, Clock, Filter, Plus} from 'lucide-react';
 
 export const CalendarTab: React.FC = () => {
-  const { appointments, barbers, updateAppointmentStatus, setQuickAppointmentModalOpen } = useApp();
+  const { appointments, barbers, updateAppointmentStatus, setQuickAppointmentModalOpen, clients } = useApp();
   const [selectedBarberFilter, setSelectedBarberFilter] = useState<string>('all');
   const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString().split('T')[0]);
 
@@ -96,8 +96,15 @@ export const CalendarTab: React.FC = () => {
                               ? 'bg-blue-50 dark:bg-blue-500/20 border-blue-500 text-blue-900 dark:text-stone-100 font-bold shadow-sm'
                               : 'bg-white dark:bg-zinc-800 border-slate-200 dark:border-zinc-700 text-slate-800 dark:text-stone-200 shadow-xs'
                           }`}>
-                            <div className="flex items-center justify-between">
-                              <span className="font-bold text-slate-900 dark:text-stone-100">{apt.customerName}</span>
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="flex min-w-0 items-center gap-1.5">
+                                <Avatar
+                                  name={apt.customerName}
+                                  src={clients.find(c => c.name === apt.customerName)?.avatar}
+                                  size={20}
+                                />
+                                <span className="truncate font-bold text-slate-900 dark:text-stone-100">{apt.customerName}</span>
+                              </span>
                               <span className="text-[10px] font-mono text-blue-600 dark:text-blue-400 font-bold">${apt.price}</span>
                             </div>
                             <span className="text-[10px] text-slate-500 dark:text-stone-400 mt-1 truncate">{apt.notes || 'Cut & Style'}</span>
